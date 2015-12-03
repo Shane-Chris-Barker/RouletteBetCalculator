@@ -1,0 +1,26 @@
+#header {
+    background: url(../img/header.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height:50%;
+    color:white;
+}
+
+.center{
+    text-align:center;
+}
+
+#form-bg{
+    background-color: #101010;
+    border-color: black;
+    border-radius: 5%;
+    color:white;
+}
+
+.pull-down{
+    margin-top:5%;
+}
+
+.pull-down-lg{
+    margin-top:10%;
+}

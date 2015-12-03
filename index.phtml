@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <!DOCTYPE html>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Include All from assets folder -->
+        <?php include_once 'assets/headerLinks.phtml';
+         require 'calculatePayout.php';?>
+    </head>
+    <body>
+    <nav class="navbar-inverse navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Roulette Calculator</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-md-12 container-fluid" id="header">
+        <h3 class="center">Welcome to the...</h3>
+        <h1 class="center">Roulette Bet Calculator</h1>
+    </div>
+    <div class="container col-md-6">
+        <img src="assets/img/roulette.jpg" class="img-responsive"/>
+    </div>
+        <div class="col-md-6 pull-down" id="form-bg">
+            <div class="col-md-6">
+                <p class="pull-down-lg">
+                    Welcome to the Roulette Calculator. A quick little script to add up the winnings that a given payout would make on
+                    a roulette table.
+
+                    <br /><br />
+
+                    Simply enter the amount of chips on each betting position or enter the stake on a French bet and click calculate to see the payout.
+                </p>
+                <p>
+                    <?php if($betPays):
+                        echo 'The payout for this bet is '.$betPays;
+                     endif;
+                    ?>
+                </p>
+            </div>
+            <form class="col-md-6 center pull-down" method="post">
+                <div class="form-group">
+                    <label for="straight">Straight Up</label>
+                    <input class="form-control center" name="straight" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="split">Split</label>
+                    <input class="form-control center" name="split" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="street">Street</label>
+                    <input class="form-control center" name="street" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="corner">Corner</label>
+                    <input class="form-control center" name="corner" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="six">Six Line</label>
+                    <input class="form-control center" name="six" value="0">
+                </div>
+                <button type="submit" class="btn btn-default" name="submit" id="submit">submit</button>
+            </form>
+        </div>
+    </body>
+</html>
