@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include All from assets folder -->
+    <?php include_once 'assets/headerLinks.phtml';?>
+</head>
+<body>
+<nav class="navbar-inverse navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Roulette Calculator</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.phtml">Home</a></li>
+                <li class="active"><a href="spinWheel.phtml">Spin the Wheel<span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="col-md-12 container-fluid" id="header">
+    <h3 class="center">Welcome to the...</h3>
+    <h1 class="center">Roulette Bet Calculator</h1>
+</div>
+
+<div class="col-md-12 pull-down">
+    <div class="col-md-6">
+        <p class="pull-down-lg">
+            Think of a number between 0 and 36. Click 'Spin' to see if your number comes out!
+        </p>
+        <p class="hidden" id="hidden">
+            your winning number is:
+        </p>
+
+        <input type="button" value="Spin" class="spinner" id="spin"/>
+    </div>
+    <div class="container col-md-6">
+        <img src="assets/img/roulette-wheel.png" class="img-responsive " id="wheel"/>
+    </div>
+</div>
+</body>
+</html>
+<!-- This could go in an include ;) -->
+<script type="text/javascript">
+    $(function() {
+        // When the element with the .spinner class is clicked...
+        $(".spinner").click(function() {
+            // Use Font-awesome to add a class of fa-spin to the roulette image and use a
+            //  que to set a delay
+            $('#wheel').addClass("fa-spin").delay(5000).queue(function(){
+                // After the delay, remove the class and stop the spin...
+                $(this).removeClass("fa-spin");
+                // End the que
+                $(this).dequeue();
+                // Create a winner between 0 and 36
+                var winner = Math.floor((Math.random() * 36) + 0);
+                //Assign the html of the hidden div with the text and winner variable
+                $("#hidden").html("The winning number is " + winner);
+                // Remove the hidden class for the world to see.
+                $('#hidden').removeClass("hidden");
+
+            });
+        });
+    });
+</script>
+
+
