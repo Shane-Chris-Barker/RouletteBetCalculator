@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Include All from assets folder -->
     <?php include_once 'assets/headerLinks.phtml';
     require 'spinWheel.php';?>
@@ -40,12 +38,23 @@
         <p class="pull-down-lg">
             Select a number between 0 and 36. Click 'Spin' to see if your number comes out!
         </p>
+        <!-- Looping through the results ($numbers) of the first function call in spinWheel.php
+        using the value to populate the value and text. -->
+        <label for="numberSelector">Choose a Number</label>
         <select id='numberSelector' class="form-control">
             <?php foreach ($numbers as $key => $value):?>
-            <option value="<?php echo $value;?>"><?php echo $key;?></option>
+            <option value="<?php echo $value;?>"><?php echo $value;?></option>
+            <?php endforeach;?>
+        </select>
+        <!-- Do it again for the next function call ($stakes) :) -->
+        <label for="stakeSelector">Choose a stake</label>
+        <select id='stakeSelector' class="form-control">
+            <?php foreach ($stakes as $key => $value):?>
+                <option value="<?php echo $value;?>"><?php echo $value;?></option>
             <?php endforeach;?>
         </select>
         <p class="hidden" id="hidden"></p>
+        <p class="hidden" id="payout"></p>
 
         <input type="button" value="Spin" class="spinner btn btn-default" id="spin"/>
     </div>
@@ -56,6 +65,7 @@
 </body>
 </html>
 <!-- This could go in an include ;) -->
+<!-- We will need an exception for 0 as it is neither odd, even, high or low ;)  -->
 <script type="text/javascript">
     $(function() {
         // When the element with the .spinner class is clicked...
@@ -83,10 +93,14 @@
                 }
                 // is the selected number the winning number?
                 if (number == winner){
-                    $("#hidden").html("Congratulations! You picked number " + number +" The winning number is " + winner +" ,which is a "+ mod +", " +highLow+" number");
+                    var stake = $('#stakeSelector :selected').text();
+                    stake = stake * 35;
+                    $("#hidden").html("Congratulations! You picked number " + number +" The winning number is " + winner +",which is an "+ mod +", " +highLow+" number");
+                    $('#payout').html("Your winnings are: £"+stake);
+                    $('#payout').removeClass("hidden");
                 } else {
                     //Assign the html of the hidden div with the text and winner variable
-                    $("#hidden").html("Unlucky. The winning number is " + winner +" ,which is a "+ mod + ", "+highLow+" number");
+                    $("#hidden").html("Unlucky. The winning number is " + winner +",which is an "+ mod + ", "+highLow+" number");
                 }
                 // Remove the hidden class for the world to see.
                 $('#hidden').removeClass("hidden");
