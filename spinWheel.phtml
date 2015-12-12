@@ -71,12 +71,22 @@
                 var number = $('#numberSelector :selected').text();
                 // Create a winner between 0 and 36
                 var winner = Math.floor((Math.random() * 36) + 0);
+                var mod = 'odd';
+                // Use Modulus to find out if this was even or odd
+                if (winner % 2 == 0){
+                     mod = 'even';
+                }
+                var highLow = "high";
+                // Is this a high or low number?
+                if (winner < 19){
+                     highLow = 'low';
+                }
                 // is the selected number the winning number?
                 if (number == winner){
-                    $("#hidden").html("Congratulations! You picked number " + number +" The winning number is " + winner);
+                    $("#hidden").html("Congratulations! You picked number " + number +" The winning number is " + winner +" ,which is a "+ mod +", " +highLow+" number");
                 } else {
                     //Assign the html of the hidden div with the text and winner variable
-                    $("#hidden").html("Unlucky. The winning number is " + winner);
+                    $("#hidden").html("Unlucky. The winning number is " + winner +" ,which is a "+ mod + ", "+highLow+" number");
                 }
                 // Remove the hidden class for the world to see.
                 $('#hidden').removeClass("hidden");
