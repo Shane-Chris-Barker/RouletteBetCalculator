@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Include All from assets folder -->
-    <?php include_once 'assets/headerLinks.phtml';?>
+    <?php include_once 'assets/headerLinks.phtml';
+    require 'spinWheel.php';?>
 </head>
 <body>
 <nav class="navbar-inverse navbar-default">
@@ -39,6 +40,11 @@
         <p class="pull-down-lg">
             Think of a number between 0 and 36. Click 'Spin' to see if your number comes out!
         </p>
+        <select id='numberSelector'>
+            <?php foreach ($numbers as $key => $value):?>
+            <option value="<?php echo $value;?>"><?php echo $key;?></option>
+            <?php endforeach;?>
+        </select>
         <p class="hidden" id="hidden"></p>
 
         <input type="button" value="Spin" class="spinner" id="spin"/>
@@ -61,10 +67,17 @@
                 $(this).removeClass("fa-spin");
                 // End the que
                 $(this).dequeue();
+                // get the value of the selected number from the drop down...
+                var number = $('#numberSelector :selected').text();
                 // Create a winner between 0 and 36
                 var winner = Math.floor((Math.random() * 36) + 0);
-                //Assign the html of the hidden div with the text and winner variable
-                $("#hidden").html("The winning number is " + winner);
+                // is the selected number the winning number?
+                if (number == winner){
+                    $("#hidden").html("Congratulations! You picked number " + number +" The winning number is " + winner);
+                } else {
+                    //Assign the html of the hidden div with the text and winner variable
+                    $("#hidden").html("Unlucky. The winning number is " + winner);
+                }
                 // Remove the hidden class for the world to see.
                 $('#hidden').removeClass("hidden");
 
